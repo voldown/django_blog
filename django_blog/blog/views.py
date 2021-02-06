@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 
@@ -106,6 +108,40 @@ class TagView(IndexView):
             'tag': tag,
         })
         return context
+
+
+class SearchView(IndexView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return queryset
+        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update({
+            'keyword': self.request.GET.get('keyword', '')
+        })
+        return context
+
+
+class AuthorView(IndexView):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        author_id = self.kwargs.get('owner_id')
+        return queryset.filter(owner_id=author_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        author_id = self.kwargs.get('owner_id')
+        author = get_object_or_404(User, pk=author_id)
+        context.update({
+            'author': author,
+        })
+        return context
+
+
 
 
 
