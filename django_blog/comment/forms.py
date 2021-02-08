@@ -2,6 +2,7 @@ from django import forms
 
 from .models import Comment
 
+import mistune
 
 class CommentForm(forms.ModelForm):
     nickname = forms.CharField(
@@ -35,11 +36,13 @@ class CommentForm(forms.ModelForm):
 
     def clean_content(self):
         content = self.cleaned_data.get('content')
-        if len(content) < 10:
+        if len(content) < 5:
             raise forms.ValidationError('评论内容太短啦。')
+        content = mistune.markdown(content)
         return content
 
     class Meta:
         model = Comment
         fields = ['nickname', 'email', 'website', 'content']
+
 
