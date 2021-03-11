@@ -59,12 +59,16 @@ class PostAdmin(BaseOwnerAdmin):
     # 编辑页面
     save_on_top = False
 
+    # 展示字段及其顺序
     fields = (
         ('category', 'title'),
+        'tag',
         'desc',
         'status',
+        'is_md',
+        'content_ck',
+        'content_md',
         'content',
-        'tag',
     )
 
     # 通过自定义函数的方式展示自定义字段

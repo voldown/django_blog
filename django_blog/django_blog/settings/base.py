@@ -35,7 +35,10 @@ INSTALLED_APPS = [
     'blog',
     'config',
     'comment',
-
+    'ckeditor',
+    'ckeditor_uploader',
+    'jquery',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -115,3 +118,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'themes', THEME, 'static'), )
+
+
+# ckeditor 配置
+CK_EDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippets',  # 配置代码插件 
+    }
+}
+
+
+# MEDIA 配置
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+
+

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('content', models.CharField(blank=True, help_text='如果设置的不是 HTML 类型，可为空', max_length=500, verbose_name='内容')),
                 ('status', models.PositiveIntegerField(choices=[(1, '展示'), (0, '隐藏')], default=1, verbose_name='状态')),
                 ('created_time', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('owner', models.ForeignKey(default='default', on_delete=django.db.models.deletion.SET_DEFAULT, to=settings.AUTH_USER_MODEL, verbose_name='作者')),
+                ('owner', models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='作者')),
             ],
             options={
                 'verbose_name': '侧边栏',
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                 ('status', models.PositiveIntegerField(choices=[(1, '正常'), (0, '删除')], default=1, verbose_name='状态')),
                 ('weight', models.PositiveIntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], default=1, help_text='权重高展示顺序靠前', verbose_name='权重')),
                 ('created_time', models.DateTimeField(auto_now_add=True, verbose_name='创建时间')),
-                ('owner', models.ForeignKey(default='default', on_delete=django.db.models.deletion.SET_DEFAULT, to=settings.AUTH_USER_MODEL, verbose_name='作者')),
+                ('owner', models.ForeignKey(default='1', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='作者')),
             ],
             options={
                 'verbose_name': '友链',
